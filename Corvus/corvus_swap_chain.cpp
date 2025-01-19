@@ -371,6 +371,7 @@ namespace corvus {
 		return availableFormats[0];
 	}
 
+	//comment out for regular vSync
 	VkPresentModeKHR CorvusSwapChain::chooseSwapPresentMode(
 		const std::vector<VkPresentModeKHR>& availablePresentModes) {
 		for (const auto& availablePresentMode : availablePresentModes) {
