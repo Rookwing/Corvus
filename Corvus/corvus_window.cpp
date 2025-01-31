@@ -1,6 +1,7 @@
 #include "corvus_window.hpp"
 
 #include <stdexcept>
+#include <iostream>
 
 namespace corvus {
 	CorvusWindow::CorvusWindow(int w, int h, std::string name) : width{ w }, height{ h }, windowName{ name } {
@@ -25,6 +26,10 @@ namespace corvus {
 		if (glfwCreateWindowSurface(instance, window, nullptr, surface) != VK_SUCCESS)
 		{
 			throw std::runtime_error("failed to create windows surface");
+		}
+		else
+		{
+			std::cout << "Window Surface Created!" << std::endl;
 		}
 	}
 }

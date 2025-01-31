@@ -9,30 +9,33 @@
 #include <vector>
 
 namespace corvus {
-	class FirstApp {
+	class Corvus {
 	public:
 		static constexpr int WIDTH = 800;
 		static constexpr int HEIGHT = 600;
 
-		FirstApp();
-		~FirstApp();
+		Corvus();
+		~Corvus();
 
-		FirstApp(const FirstApp&) = delete;
-		FirstApp& operator=(const FirstApp&) = delete;
+		Corvus(const Corvus&) = delete;
+		Corvus& operator=(const Corvus&) = delete;
 
 		void run();
+		void initVulkan();
+		void cleanup();
 
 	private:
 		void createPipelineLayout();
 		void createPipeline();
-		void createCommandBuffers();
 		void drawFrame();
+		void destroyPipelineLayout();
 
+		std::string vertShaderPath{ "shaders/compiled/simple_shader.vert.spv" };
+		std::string fragShaderPath{ "shaders/compiled/simple_shader.frag.spv" };
 		CorvusWindow corvusWindow{ WIDTH, HEIGHT, "Hello Vulkan!" };
 		CorvusDevice corvusDevice{ corvusWindow };
 		CorvusSwapChain corvusSwapChain{ corvusDevice, corvusWindow.getExtent() };
-		std::unique_ptr<CorvusPipeline> corvusPipeline;
-		VkPipelineLayout pipelineLayout;
+		VkPipelineLayout pipelineLayout{};
 		std::vector<VkCommandBuffer> commandBuffers;
 	};
 }

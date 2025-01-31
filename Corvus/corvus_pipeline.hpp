@@ -1,6 +1,7 @@
 #pragma once
 
 #include "corvus_device.hpp"
+#include "corvus_swap_chain.hpp"
 
 //std
 #include<string>
@@ -48,5 +49,6 @@ namespace corvus {
 		VkPipeline graphicsPipeline;
 		VkShaderModule vertShaderModule;
 		VkShaderModule fragShaderModule;
+		VkPipelineLayout pipelineLayout{};
 	};
 }

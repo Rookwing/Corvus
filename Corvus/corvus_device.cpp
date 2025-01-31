@@ -13,7 +13,7 @@ namespace corvus {
 		VkDebugUtilsMessageTypeFlagsEXT messageType,
 		const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
 		void* pUserData) {
-		std::cerr << "validation layer: " << pCallbackData->pMessage << std::endl;
+		std::cerr << "validation layer: " << pCallbackData->pMessage << "\n" << std::endl;
 
 		return VK_FALSE;
 	}
@@ -105,7 +105,10 @@ namespace corvus {
 		if (vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS) {
 			throw std::runtime_error("failed to create instance!");
 		}
-
+		else
+		{
+			std::cout << "Created Instance!" << std::endl;
+		}
 		hasGflwRequiredInstanceExtensions();
 	}
 
@@ -114,6 +117,10 @@ namespace corvus {
 		vkEnumeratePhysicalDevices(instance, &deviceCount, nullptr);
 		if (deviceCount == 0) {
 			throw std::runtime_error("failed to find GPUs with Vulkan support!");
+		}
+		else
+		{
+			std::cout << "GPU Vulkan Compatible!" << std::endl;
 		}
 		std::cout << "Device count: " << deviceCount << std::endl;
 		std::vector<VkPhysicalDevice> devices(deviceCount);
@@ -129,7 +136,10 @@ namespace corvus {
 		if (physicalDevice == VK_NULL_HANDLE) {
 			throw std::runtime_error("failed to find a suitable GPU!");
 		}
-
+		else
+		{
+			std::cout << "Found Suitable GPU!" << std::endl;
+		}
 		vkGetPhysicalDeviceProperties(physicalDevice, &properties);
 		std::cout << "physical device: " << properties.deviceName << std::endl;
 	}
@@ -176,7 +186,10 @@ namespace corvus {
 		if (vkCreateDevice(physicalDevice, &createInfo, nullptr, &device_) != VK_SUCCESS) {
 			throw std::runtime_error("failed to create logical device!");
 		}
-
+		else
+		{
+			std::cout << "Created Logical Device!" << std::endl;
+		}
 		vkGetDeviceQueue(device_, indices.graphicsFamily, 0, &graphicsQueue_);
 		vkGetDeviceQueue(device_, indices.presentFamily, 0, &presentQueue_);
 	}
@@ -192,6 +205,10 @@ namespace corvus {
 
 		if (vkCreateCommandPool(device_, &poolInfo, nullptr, &commandPool) != VK_SUCCESS) {
 			throw std::runtime_error("failed to create command pool!");
+		}
+		else
+		{
+			std::cout << "Created Command Pool!" << std::endl;
 		}
 	}
 
@@ -422,7 +439,10 @@ namespace corvus {
 		if (vkCreateBuffer(device_, &bufferInfo, nullptr, &buffer) != VK_SUCCESS) {
 			throw std::runtime_error("failed to create vertex buffer!");
 		}
-
+		else
+		{
+			std::cout << "Created Vertex Buffer!" << std::endl;
+		}
 		VkMemoryRequirements memRequirements;
 		vkGetBufferMemoryRequirements(device_, buffer, &memRequirements);
 
@@ -434,7 +454,6 @@ namespace corvus {
 		if (vkAllocateMemory(device_, &allocInfo, nullptr, &bufferMemory) != VK_SUCCESS) {
 			throw std::runtime_error("failed to allocate vertex buffer memory!");
 		}
-
 		vkBindBufferMemory(device_, buffer, bufferMemory, 0);
 	}
 

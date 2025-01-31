@@ -24,7 +24,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="first_app.cpp">
+    <ClCompile Include="corvus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="corvus_pipeline.cpp">
@@ -41,7 +41,7 @@
     <ClInclude Include="corvus_window.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="first_app.hpp">
+    <ClInclude Include="corvus.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="corvus_pipeline.hpp">
