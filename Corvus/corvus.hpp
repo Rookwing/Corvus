@@ -35,7 +35,6 @@ namespace corvus {
 		CorvusWindow corvusWindow{ WIDTH, HEIGHT, "Hello Vulkan!" };
 		CorvusDevice corvusDevice{ corvusWindow };
 		CorvusSwapChain corvusSwapChain{ corvusDevice, corvusWindow.getExtent() };
-		std::unique_ptr<CorvusPipeline> corvusPipeline;
 		VkPipelineLayout pipelineLayout{};
 		std::vector<VkCommandBuffer> commandBuffers;
 	};

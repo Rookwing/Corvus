@@ -54,7 +54,7 @@ namespace corvus {
 		auto pipelineConfig = CorvusPipeline::defaultPipelineConfigInfo(corvusSwapChain.width(), corvusSwapChain.height());
 		pipelineConfig.renderPass = corvusSwapChain.getRenderPass();
 		pipelineConfig.pipelineLayout = pipelineLayout;
-		CorvusPipeline::CorvusPipeline(corvusDevice, vertShaderPath, fragShaderPath, pipelineConfig);
+		CorvusPipeline corvusPipeline = CorvusPipeline(corvusDevice, vertShaderPath, fragShaderPath, pipelineConfig);
 	}
 
 	void Corvus::drawFrame() {
