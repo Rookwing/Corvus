@@ -7,17 +7,26 @@
 namespace corvus {
 	Corvus::Corvus()
 	{
-		Corvus::createPipelineLayout();
 	}
 	Corvus::~Corvus()
 	{
-		Corvus::destroyPipelineLayout();
 	}
 	void Corvus::run() {
+
 		while (!corvusWindow.shouldClose()) {
 			glfwPollEvents();
 			drawFrame();
 		}
+	}
+
+
+	void Corvus::initVulkan() {
+		Corvus::createPipelineLayout();
+		Corvus::createPipeline();
+	}
+
+	void Corvus::cleanup() {
+		Corvus::destroyPipelineLayout();
 	}
 
 	void Corvus::createPipelineLayout() {
@@ -33,7 +42,7 @@ namespace corvus {
 		}
 		else
 		{
-			std::cout << "Graphics Pipeline Created!" << std::endl;
+			std::cout << "Pipeline Layout Created!" << std::endl;
 		}
 	}
 
@@ -44,6 +53,8 @@ namespace corvus {
 	void Corvus::createPipeline() {
 		auto pipelineConfig = CorvusPipeline::defaultPipelineConfigInfo(corvusSwapChain.width(), corvusSwapChain.height());
 		pipelineConfig.renderPass = corvusSwapChain.getRenderPass();
+		pipelineConfig.pipelineLayout = pipelineLayout;
+		CorvusPipeline::CorvusPipeline(corvusDevice, vertShaderPath, fragShaderPath, pipelineConfig);
 	}
 
 	void Corvus::drawFrame() {
