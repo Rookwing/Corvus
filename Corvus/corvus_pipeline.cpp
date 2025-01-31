@@ -48,7 +48,7 @@ namespace corvus {
 		createShaderModule(vertCode, &vertShaderModule);
 		createShaderModule(fragCode, &fragShaderModule);
 
-		VkPipelineShaderStageCreateInfo shaderStages[2];
+		VkPipelineShaderStageCreateInfo shaderStages[2]{};
 		shaderStages[0].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
 		shaderStages[0].stage = VK_SHADER_STAGE_VERTEX_BIT;
 		shaderStages[0].module = vertShaderModule;
@@ -108,8 +108,6 @@ namespace corvus {
 			std::cout << "Graphics Pipeline Created!" << std::endl;
 		}
 
-		//std::cout << "Vertex Shader Code Size: " << vertCode.size() << "\n";
-		//std::cout << "Fragment Shader Code Size: " << fragCode.size() << "\n";
 	}
 
 	void CorvusPipeline::createShaderModule(const std::vector<char>& code, VkShaderModule* shaderModule) {
@@ -152,6 +150,14 @@ namespace corvus {
 		configInfo.rasterizationInfo.depthBiasClamp = 0.0f;				//Optional
 		configInfo.rasterizationInfo.depthBiasSlopeFactor = 0.0f;		//Optional
 
+		configInfo.multisamplestate.sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
+		configInfo.multisamplestate.sampleShadingEnable = VK_FALSE;
+		configInfo.multisamplestate.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
+		configInfo.multisamplestate.minSampleShading = 1.0f;
+		configInfo.multisamplestate.pSampleMask = nullptr;
+		configInfo.multisamplestate.alphaToCoverageEnable = VK_FALSE;
+		configInfo.multisamplestate.alphaToOneEnable = VK_FALSE;
+
 		configInfo.colorBlendAttachment.colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
 		configInfo.colorBlendAttachment.blendEnable = VK_FALSE;
 		configInfo.colorBlendAttachment.srcColorBlendFactor = VK_BLEND_FACTOR_ONE;			//Optional
@@ -182,8 +188,6 @@ namespace corvus {
 		configInfo.depthStencilInfo.front = {};
 		configInfo.depthStencilInfo.back = {};
 
-		configInfo.multisamplestate.sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
-		configInfo.multisamplestate.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
 		return configInfo;
 	}
 }
