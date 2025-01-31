@@ -1,22 +1,26 @@
-#include"first_app.hpp"
+#include"corvus.hpp"
 
 //std
+#include<iostream>
 #include<stdexcept>
 
 namespace corvus {
-	FirstApp::FirstApp()
+	Corvus::Corvus()
 	{
+		Corvus::createPipelineLayout();
 	}
-	FirstApp::~FirstApp()
+	Corvus::~Corvus()
 	{
+		Corvus::destroyPipelineLayout();
 	}
-	void FirstApp::run() {
+	void Corvus::run() {
 		while (!corvusWindow.shouldClose()) {
 			glfwPollEvents();
+			drawFrame();
 		}
 	}
 
-	void FirstApp::createPipelineLayout() {
+	void Corvus::createPipelineLayout() {
 		VkPipelineLayoutCreateInfo pipelineLayoutInfo{};
 		pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
 		pipelineLayoutInfo.setLayoutCount = 0;
@@ -27,10 +31,22 @@ namespace corvus {
 		if (vkCreatePipelineLayout(corvusDevice.device(), &pipelineLayoutInfo, nullptr, &pipelineLayout) != VK_SUCCESS) {
 			throw std::runtime_error("Failed to create pipeline layout.");
 		}
+		else
+		{
+			std::cout << "Graphics Pipeline Created!" << std::endl;
+		}
 	}
 
-	void FirstApp::createPipeline() {
+	void Corvus::destroyPipelineLayout() {
+		vkDestroyPipelineLayout(corvusDevice.device(), pipelineLayout, nullptr);
+	}
+
+	void Corvus::createPipeline() {
 		auto pipelineConfig = CorvusPipeline::defaultPipelineConfigInfo(corvusSwapChain.width(), corvusSwapChain.height());
 		pipelineConfig.renderPass = corvusSwapChain.getRenderPass();
+	}
+
+	void Corvus::drawFrame() {
+
 	}
 }

@@ -104,6 +104,10 @@ namespace corvus {
 		if (vkCreateGraphicsPipelines(corvusDevice.device(), VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS) {
 			throw std::runtime_error("failed to create graphics pipeline");
 		}
+		else
+		{
+			std::cout << "Graphics Pipeline Created!";
+		}
 
 		//std::cout << "Vertex Shader Code Size: " << vertCode.size() << "\n";
 		//std::cout << "Fragment Shader Code Size: " << fragCode.size() << "\n";

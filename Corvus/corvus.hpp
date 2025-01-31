@@ -9,16 +9,16 @@
 #include <vector>
 
 namespace corvus {
-	class FirstApp {
+	class Corvus {
 	public:
 		static constexpr int WIDTH = 800;
 		static constexpr int HEIGHT = 600;
 
-		FirstApp();
-		~FirstApp();
+		Corvus();
+		~Corvus();
 
-		FirstApp(const FirstApp&) = delete;
-		FirstApp& operator=(const FirstApp&) = delete;
+		Corvus(const Corvus&) = delete;
+		Corvus& operator=(const Corvus&) = delete;
 
 		void run();
 
@@ -27,6 +27,7 @@ namespace corvus {
 		void createPipeline();
 		void createCommandBuffers();
 		void drawFrame();
+		void destroyPipelineLayout();
 
 		CorvusWindow corvusWindow{ WIDTH, HEIGHT, "Hello Vulkan!" };
 		CorvusDevice corvusDevice{ corvusWindow };

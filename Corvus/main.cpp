@@ -1,11 +1,11 @@
-#include "first_app.hpp"
+#include "corvus.hpp"
 
 #include <cstdlib>
 #include <iostream>
 #include <stdexcept>
 
 int main() {
-	corvus::FirstApp app{};
+	corvus::Corvus app{};
 
 	try {
 		app.run();

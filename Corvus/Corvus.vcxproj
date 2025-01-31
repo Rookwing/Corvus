@@ -163,7 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="first_app.cpp" />
+    <ClCompile Include="corvus.cpp" />
     <ClCompile Include="corvus_window.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="corvus_pipeline.cpp" />
@@ -171,7 +171,7 @@
     <ClCompile Include="corvus_swap_chain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="first_app.hpp" />
+    <ClInclude Include="corvus.hpp" />
     <ClInclude Include="corvus_window.hpp" />
     <ClInclude Include="corvus_pipeline.hpp" />
     <ClInclude Include="corvus_device.hpp" />
