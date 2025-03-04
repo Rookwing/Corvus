@@ -7,6 +7,7 @@
 
 #include <memory>
 #include <vector>
+#include <array>
 
 namespace corvus {
 	class Corvus {
@@ -21,20 +22,22 @@ namespace corvus {
 		Corvus& operator=(const Corvus&) = delete;
 
 		void run();
-		void initVulkan();
+		void init();
 		void cleanup();
 
 	private:
 		void createPipelineLayout();
-		void createPipeline();
-		void drawFrame();
 		void destroyPipelineLayout();
+		void createPipeline();
+		void createCommandBuffer();
+		void drawFrame();
 
 		std::string vertShaderPath{ "shaders/compiled/simple_shader.vert.spv" };
 		std::string fragShaderPath{ "shaders/compiled/simple_shader.frag.spv" };
 		CorvusWindow corvusWindow{ WIDTH, HEIGHT, "Hello Vulkan!" };
 		CorvusDevice corvusDevice{ corvusWindow };
 		CorvusSwapChain corvusSwapChain{ corvusDevice, corvusWindow.getExtent() };
+		std::unique_ptr<CorvusPipeline> corvusPipeline;
 		VkPipelineLayout pipelineLayout{};
 		std::vector<VkCommandBuffer> commandBuffers;
 	};

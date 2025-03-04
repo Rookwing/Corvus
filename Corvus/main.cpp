@@ -7,8 +7,6 @@
 int main() {
 	corvus::Corvus app{};
 
-	app.initVulkan();
-
 	try {
 		app.run();
 	}
@@ -19,6 +17,5 @@ int main() {
 		return EXIT_FAILURE;
 	}
 	
-	app.cleanup();
 	return EXIT_SUCCESS;
 }
