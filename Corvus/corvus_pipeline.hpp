@@ -9,17 +9,36 @@
 
 namespace corvus {
 	struct PipelineConfigInfo {
+		PipelineConfigInfo()
+			: viewport{}
+			, scissor{}
+			, viewportInfo{}
+			, inputAssemblyInfo{}
+			, rasterizationInfo{}
+			, multisamplestate{}
+			, colorBlendAttachment{}
+			, colorBlendInfo{}
+			, depthStencilInfo{}
+			, pipelineLayout(nullptr)
+			, renderPass(nullptr)
+			, subpass(0) {
+		}
+
+		PipelineConfigInfo(const PipelineConfigInfo&) = delete;
+		PipelineConfigInfo& operator=(const PipelineConfigInfo&) = delete;
+
 		VkViewport viewport;
 		VkRect2D scissor;
+		VkPipelineViewportStateCreateInfo viewportInfo;
 		VkPipelineInputAssemblyStateCreateInfo inputAssemblyInfo;
 		VkPipelineRasterizationStateCreateInfo rasterizationInfo;
 		VkPipelineMultisampleStateCreateInfo multisamplestate;
 		VkPipelineColorBlendAttachmentState colorBlendAttachment;
 		VkPipelineColorBlendStateCreateInfo colorBlendInfo;
 		VkPipelineDepthStencilStateCreateInfo depthStencilInfo;
-		VkPipelineLayout pipelineLayout = nullptr;
-		VkRenderPass renderPass = nullptr;
-		uint32_t subpass = 0;
+		VkPipelineLayout pipelineLayout;
+		VkRenderPass renderPass;
+		uint32_t subpass;
 	};
 
 	class CorvusPipeline {
@@ -34,7 +53,9 @@ namespace corvus {
 		CorvusPipeline(const CorvusPipeline&) = delete; //want to avoid duplicating pointers
 		void operator=(const CorvusPipeline&) = delete;
 
-		static PipelineConfigInfo defaultPipelineConfigInfo(uint32_t width, uint32_t height);
+		void bind(VkCommandBuffer commandBuffer);
+
+		static void defaultPipelineConfigInfo(PipelineConfigInfo& configInfo, uint32_t width, uint32_t height);
 	private:
 		static std::vector<char> readFile(const std::string& filepath);
 
